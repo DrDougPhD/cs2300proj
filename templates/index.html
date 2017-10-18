@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <title>Something Meaningful</title>
+    <meta charset="utf-8" />
+    {# Load a file within the static directory #}
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='stylesheet.css') }}">
+</head>
+<body>
+  {% if header %}
+  <header><h1>{{ header }}</h1></header>
+  {% else %}
+  <header><h1>CS2300 Flask Demo</h1></header>
+  {% endif %}
+  <form action="{{ url_for('insert') }}"
+        method="post">
+    Something: <input type="text"
+                      name="form-field">
+    <input type="submit" value="Submit">
+  </form>
+
+  {% if list_of_stuff %}
+  <div>
+    <ul>
+        {% for (id, val) in list_of_stuff %}
+        <li>{{ val }} <a href="{{ url_for('delete', stuff_id=id) }}">Delete</a></li>
+        {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</body>
+</html>
